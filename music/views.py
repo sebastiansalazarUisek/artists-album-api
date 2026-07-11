@@ -9,4 +9,4 @@ class ArtistViewSet(viewsets.ModelViewSet):
 
 class AlbumViewSet(viewsets.ModelViewSet):
     queryset = Album.objects.all()
-    serializer_class = AlbumSerializer
+    serializer_class = AlbumSerializer 
