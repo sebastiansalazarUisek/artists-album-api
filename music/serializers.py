@@ -5,9 +5,15 @@ class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = '__all__'
-        
 
 class AlbumSerializer(serializers.ModelSerializer):
+    artist = ArtistSerializer(read_only=True)
+    artist_id = serializers.PrimaryKeyRelatedField(
+        queryset=Artist.objects.all(),
+        source="artist",
+        write_only=True
+    )
+
     class Meta:
         model = Album
-        fields = '__all__'
+        fields = "__all__"

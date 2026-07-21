@@ -1,4 +1,4 @@
-#!/home/sebastian/Desktop/artists-album-api/venv/bin/python3
+#!/home/sebastian/Desktop/ARTIST-ALBUM/artists-album-api/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
