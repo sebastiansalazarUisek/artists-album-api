@@ -1,31 +1,24 @@
-# 🎵 Music API
+# 🎵 Music API - Backend
 
 ## 📖 Descripción
 
-Music API es una aplicación web desarrollada con **Django** y **Django REST Framework** que permite administrar artistas y álbumes mediante una API REST.
+Music API es una API REST desarrollada con **Django** y **Django REST Framework** para la gestión de artistas y álbumes musicales.
 
-El proyecto implementa un CRUD completo para ambas entidades, permite la carga de imágenes para los artistas, protege los endpoints mediante autenticación OAuth 2.0 y ofrece una API lista para ser consumida por un frontend desarrollado en React o por herramientas como Postman.
-
-El desarrollo se realizó siguiendo una arquitectura **Backend First**, priorizando la construcción y validación de la API antes de implementar la interfaz de usuario.
+La aplicación implementa operaciones CRUD completas, autenticación mediante OAuth 2.0, carga de imágenes para artistas, permisos basados en autenticación y una arquitectura preparada para ser consumida por un frontend desarrollado en React o cualquier otro cliente HTTP.
 
 ---
 
-## 🎯 Objetivo
+## 🚀 Características
 
-Desarrollar una API REST para la gestión de artistas y álbumes aplicando buenas prácticas de desarrollo backend, autenticación mediante OAuth 2.0, manejo de relaciones entre entidades y pruebas de funcionamiento utilizando Postman.
-
----
-
-## 🚀 Funcionalidades
-
-- Gestión de artistas (CRUD)
-- Gestión de álbumes (CRUD)
-- Relación Uno a Muchos (1:N) entre artistas y álbumes
-- Carga de imágenes para artistas
-- Autenticación mediante OAuth 2.0
-- Protección de endpoints con Bearer Token
-- Configuración de CORS para integración con React
-- Pruebas de la API mediante Postman
+- CRUD completo de artistas.
+- CRUD completo de álbumes.
+- Relación uno a muchos entre artistas y álbumes.
+- Carga de imágenes para artistas.
+- Autenticación mediante OAuth 2.0.
+- Permisos de acceso según autenticación.
+- Serializers anidados para consultas.
+- Filtrado de álbumes por artista.
+- API preparada para integración con React.
 
 ---
 
@@ -46,11 +39,13 @@ Desarrollar una API REST para la gestión de artistas y álbumes aplicando buena
 
 ## 📂 Estructura del proyecto
 
+```text
 artists-album-api/
 │
 ├── config/
 ├── music/
-├── artist_images/
+├── media/
+│   └── artist_images/
 ├── manage.py
 ├── requirements.txt
 └── README.md
@@ -58,7 +53,7 @@ artists-album-api/
 
 ---
 
-## 🗄️ Modelo de Base de Datos
+## 🗄️ Modelo de datos
 
 ### Artista
 
@@ -73,21 +68,35 @@ artists-album-api/
 - Título
 - Año de lanzamiento
 - Número de canciones
-- Artista (Clave Foránea)
-
-Relación:
+- Artista (Foreign Key)
 
 ```text
-Artista (1) ───────────< Álbum (N)
+Artista (1)
+     │
+     └──────────────< Álbum (N)
 ```
 
 ---
 
-## 🔐 Autenticación
+## 🔐 Autenticación y permisos
 
 La API utiliza **OAuth 2.0** mediante **Django OAuth Toolkit**.
 
-Para acceder a los endpoints protegidos es necesario enviar un **Bearer Token** válido en cada petición.
+### Usuarios no autenticados
+
+- Consultar artistas.
+- Consultar álbumes.
+
+### Usuarios autenticados
+
+- Crear artistas.
+- Editar artistas.
+- Eliminar artistas.
+- Crear álbumes.
+- Editar álbumes.
+- Eliminar álbumes.
+
+Las operaciones protegidas requieren enviar un **Bearer Token** válido.
 
 ---
 
@@ -121,28 +130,63 @@ Para acceder a los endpoints protegidos es necesario enviar un **Bearer Token** 
 
 ---
 
+## ⚙️ Instalación
+
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/sebastiansalazarUisek/artists-album-api.git
+```
+
+Crear un entorno virtual:
+
+```bash
+python -m venv venv
+```
+
+Activar el entorno virtual.
+
+Instalar dependencias:
+
+```bash
+pip install -r requirements.txt
+```
+
+Aplicar migraciones:
+
+```bash
+python manage.py migrate
+```
+
+Iniciar el servidor:
+
+```bash
+python manage.py runserver
+```
+
+---
+
 ## 🧪 Pruebas realizadas
 
-La API fue validada mediante:
+La API fue validada utilizando:
 
 - Django REST Framework Browsable API
 - Postman
 
-Se probaron correctamente las siguientes operaciones:
+Se verificó el correcto funcionamiento de:
 
-- GET
-- POST
-- PUT
-- PATCH
-- DELETE
-- Autenticación OAuth 2.0
-- Autorización mediante Bearer Token
+- CRUD de artistas.
+- CRUD de álbumes.
+- Autenticación OAuth 2.0.
+- Permisos de acceso.
+- Carga de imágenes.
+- Filtrado de álbumes por artista.
 
 ---
 
 ## 🌍 Configuración CORS
 
-Se configuró CORS para permitir la comunicación entre el backend desarrollado en Django y el frontend desarrollado en React durante el entorno de desarrollo.
+Se configuró **django-cors-headers** para permitir la comunicación entre el backend desarrollado con Django y el frontend desarrollado con React durante el entorno de desarrollo.
 
 ---
 
